@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.kas4.tinybox.widget.SectionProgressBar;
+import com.akexorcist.roundcornerprogressbar.SectionProgressBar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         },200);
 
         initOtherSectionProgressBar();
+        initNew();
     }
 
     private String[] mLevels = {"铜卡", "银卡", "金卡", "白金卡", "钻卡"};
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    SectionProgressBar progressView;
+    com.kas4.tinybox.widget.SectionProgressBar progressView;
     void initSectionProgressBar() {
         progressView = findViewById(R.id.progressView);
         progressView.setFirstPointTime(5 * 1000);
@@ -65,6 +66,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClick(View view) {
-        progressView.setCurrentState(SectionProgressBar.State.START);
+        progressView.setCurrentState(com.kas4.tinybox.widget.SectionProgressBar.State.START);
+    }
+
+
+    SectionProgressBar progressBarTest;
+    void initNew(){
+        progressBarTest= (SectionProgressBar) findViewById(R.id.progressBarTest);
+        progressBarTest.setFirstPointProgress(SectionProgressBar.MIN_PROGRESS);
+    }
+
+    public void onClickTest(View view) {
+        progressBarTest.togglePlayPause();
+    }
+
+    public void onClickSpeed(View view) {
+        if (progressBarTest.getSpeed() == 1.f) progressBarTest.setSpeed(0.2f);
+        else progressBarTest.setSpeed(1.f);
+    }
+
+    public void onClickDelete(View view) {
+        progressBarTest.doDelete();
     }
 }
