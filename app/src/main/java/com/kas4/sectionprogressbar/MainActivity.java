@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
     SectionProgressBar progressBarTest;
     void initNew(){
         progressBarTest= (SectionProgressBar) findViewById(R.id.progressBarTest);
-        progressBarTest.setFirstPointProgress(SectionProgressBar.MIN_PROGRESS);
+        progressBarTest.setFirstPointProgress(SectionProgressBar.TIME_MULTI*5);
+        progressBarTest.setTotalProgress(SectionProgressBar.TIME_MULTI*30);
     }
 
     public void onClickTest(View view) {
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSpeed(View view) {
-        if (progressBarTest.getSpeed() == 1.f) progressBarTest.setSpeed(0.2f);
+        if (progressBarTest.getSpeed() == 1.f) progressBarTest.setSpeed(0.33f);
         else progressBarTest.setSpeed(1.f);
     }
 
