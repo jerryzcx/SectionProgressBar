@@ -10,7 +10,7 @@
 
 2. 第二个SectionProgressBar的arrays.xml没必要，修改掉；将cursor图和结点文字改为可选项；
 
-3.第三个SectionProgressBar 增加了速度控制
+3. 第三个SectionProgressBar 增加了速度控制
 
 # 参考
 
