@@ -93,7 +93,7 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
     private Paint mFirstPointPaint;
     private Paint mBreakPointPaint;
     private void initWidget(){
-        this.setMax(MAX_PROGRESS);
+        this.setMax(DEFAULT_MAX_PROGRESS);
         this.setRadius((int) dp2px(6f));
         this.setProgressBackgroundColor(Color.parseColor("#4DFFFFFF"));
         this.setBackgroundColor(Color.parseColor("#00000000"));
@@ -115,7 +115,7 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
     private void drawBreak(Canvas canvas){
         float viewWidth=getLayoutWidth() - (getPadding() * 2);
         synchronized (this) {
-
+            if(mBreakPointInfoList==null)mBreakPointInfoList=new LinkedList<>();
             if (!mBreakPointInfoList.isEmpty()) {
                 for (BreakPointInfo info : mBreakPointInfoList) {
                     float ratio = getMax() / info.getProgress();
@@ -183,6 +183,10 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
         mFirstPointProgress = firstPointProgress;
         invalidate();
     }
+    public void setTotalProgress(int allProgress){
+        this.setMax(allProgress);
+        invalidate();
+    }
 
     private LinkedList<BreakPointInfo> mBreakPointInfoList ;
     public synchronized void addBreakPoint() {
@@ -212,10 +216,9 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
     }
     private float mCurProgress=0.f;
     public static final float MAX_TIME=30;
-    public static final float MIN_TIME=5;
-    public static final float MAX_PROGRESS=MAX_TIME*10;
-    public static final float MIN_PROGRESS=MIN_TIME*10;
+    public static final float DEFAULT_MAX_PROGRESS=MAX_TIME*10;
     static final float progressSpan=1f;
+    public static final int TIME_MULTI=10;
 
     public void setSpeed(float speed) {
         mSpeed = speed;
@@ -260,6 +263,7 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
             mRecordTimer.cancel();
             mRecordTimer = null;
         }
+        this.addBreakPoint();
         mState=STATE_PAUSE;
     }
     public void togglePlayPause(){
@@ -267,7 +271,6 @@ public class SectionProgressBar extends BaseRoundCornerProgressBar {
             doPlay();
         }else{
             doPause();
-            this.addBreakPoint();
         }
     }
 
